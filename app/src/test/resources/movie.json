@@ -1,0 +1,16 @@
+{
+  "adult" : false,
+  "backdrop_path" : "/bIlYH4l2AyYvEysmS2AOfjO7Dn8.jpg",
+  "genre_ids" : [ 878, 28, 53, 12 ],
+  "id" : 87101,
+  "original_language" : "en",
+  "original_title" : "Terminator Genisys",
+  "overview" : "The year is 2029. John Connor, leader of the resistance continues the war against the machines. At the Los Angeles offensive, John's fears of the unknown future begin to emerge when TECOM spies reveal a new plot by SkyNet that will attack him from both fronts; past and future, and will ultimately change warfare forever.",
+  "release_date" : "2015-07-01",
+  "poster_path" : "/5JU9ytZJyR3zmClGmVm9q4Geqbd.jpg",
+  "popularity" : 55.972492,
+  "title" : "Terminator Genisys",
+  "video" : false,
+  "vote_average" : 6.3,
+  "vote_count" : 698
+}
