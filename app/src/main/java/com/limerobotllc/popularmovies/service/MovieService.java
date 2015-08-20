@@ -8,9 +8,6 @@ import retrofit.http.Query;
 
 public interface MovieService
 {
-    public String SORT_BY_POPULARITY = "popularity.desc";
-    public String SORT_BY_HIGHEST_RATED = "vote_average.desc";
-
     @GET("/3/discover/movie")
     MovieResults discoverMovies(@Query("sort_by") String sortby, @Query("api_key") String apikey);
 

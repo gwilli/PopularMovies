@@ -12,9 +12,9 @@ import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends ArrayAdapter<Movie>
 {
-    public MovieAdapter(Context context, int resource, Movie[] movies)
+    public MovieAdapter(Context context, Movie[] movies)
     {
-        super(context, resource, movies);
+        super(context, 0, movies);
     }
 
     @Override

@@ -2,17 +2,8 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".MainDiscoveryActivity">
-    <item
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        app:showAsAction="ifRoom"
-        android:title="@string/menu_sort">
-        <menu>
-            <item
-                android:id="@+id/menu_sort_popular"
-                android:title="@string/menu_sort_popular" />
-            <item
-                android:id="@+id/menu_sort_rating"
-                android:title="@string/menu_sort_rating" />
-        </menu>
-    </item>
+    <item android:id="@+id/sort_spinner"
+          android:title="@string/menu_sort"
+          app:showAsAction="ifRoom"
+          app:actionViewClass="android.widget.Spinner" />
 </menu>

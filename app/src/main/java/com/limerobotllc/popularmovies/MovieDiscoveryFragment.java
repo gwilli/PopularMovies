@@ -1,6 +1,7 @@
 package com.limerobotllc.popularmovies;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,19 +18,23 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import static com.limerobotllc.popularmovies.service.MovieService.SORT_BY_POPULARITY;
-
 public class MovieDiscoveryFragment extends Fragment implements Callback<MovieResults>
 {
     private static final String LOG_TAG = MovieDiscoveryFragment.class.getSimpleName();
     private MovieResults movieResults = null;
     private GridView gridView = null;
-    private String sortCriteria = SORT_BY_POPULARITY;
+    private String sortCriteria;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null)
+        {
+            movieResults = (MovieResults) savedInstanceState.getSerializable("movieResults");
+            sortCriteria = savedInstanceState.getString("sortCriteria");
+        }
     }
 
     @Override
@@ -37,20 +42,10 @@ public class MovieDiscoveryFragment extends Fragment implements Callback<MovieRe
     {
         View view = inflater.inflate(R.layout.movie_discovery_fragment, container, false);
 
-        if (savedInstanceState != null)
-        {
-            movieResults = (MovieResults) savedInstanceState.getSerializable("movieResults");
-            sortCriteria = savedInstanceState.getString("sortCriteria");
-        }
-
-        Movie[] movies = new Movie[0];
-        if (movieResults == null)
-            MovieServiceHelper.retrieveMovies(getActivity().getApplicationContext(), sortCriteria, this);
-        else
-            movies = movieResults.results;
-
         gridView = (GridView) view.findViewById(R.id.gridview);
-        gridView.setAdapter(new MovieAdapter(getActivity(), 0, movies));
+        Movie[] results = movieResults != null ? movieResults.results : new Movie[0];
+        gridView.setAdapter(new MovieAdapter(getActivity(), results));
+
         return view;
     }
 
@@ -59,7 +54,7 @@ public class MovieDiscoveryFragment extends Fragment implements Callback<MovieRe
     {
         super.onSaveInstanceState(outState);
         outState.putSerializable("movieResults", movieResults);
-        outState.putSerializable("sortCriteria", sortCriteria);
+        outState.putString("sortCriteria", sortCriteria);
     }
 
     @Override
@@ -68,7 +63,7 @@ public class MovieDiscoveryFragment extends Fragment implements Callback<MovieRe
         if (gridView != null && movieResults != null)
         {
             this.movieResults = movieResults;
-            gridView.setAdapter(new MovieAdapter(getActivity(), 0, movieResults.results));
+            gridView.setAdapter(new MovieAdapter(getActivity(), movieResults.results));
         }
     }
 
@@ -79,7 +74,7 @@ public class MovieDiscoveryFragment extends Fragment implements Callback<MovieRe
         Toast.makeText(getActivity(), R.string.tmdb_server_error_msg, Toast.LENGTH_SHORT).show();
     }
 
-    public void resortMovies(String sortCriteria)
+    public void retrieveMovies(@NonNull String sortCriteria)
     {
         if (!sortCriteria.equals(this.sortCriteria))
         {

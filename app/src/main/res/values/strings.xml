@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name">PopularMovies</string>
 
-    <string name="menu_sort">Sort</string>
-    <string name="menu_sort_popular">Sort by most popular</string>
-    <string name="menu_sort_rating">Sort by highest rating</string>
-
     <string name="image_base_url">http://image.tmdb.org/t/p/</string>
     <string name="image_size">w342</string>
 
     <string name="tmdb_endpoint_url">http://api.themoviedb.org</string>
     <string name="tmdb_server_error_msg">Unable to contact movie server. Please check your network connection and try again.</string>
+
+    <string name="menu_sort">Sort</string>
+
+    <string-array name="sort_display_values">
+        <item>Most popular</item>
+        <item>Highest rated</item>
+    </string-array>
+
+    <string-array name="sort_key_values">
+        <item>popularity.desc</item>
+        <item>vote_average.desc</item>
+    </string-array>
 </resources>
