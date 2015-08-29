@@ -45,7 +45,7 @@ public class MovieDetailFragment extends Fragment
         ((TextView) v.findViewById(R.id.movie_year)).setText(getMovieYear(movie.releaseDateString));
         ((TextView) v.findViewById(R.id.movie_synopsis)).setText(movie.overview);
         Picasso.with(getActivity())
-                .load(getPosterImageUrl(getActivity(), movie.posterPath, getString(R.string.image_size_small)))
+                .load(getPosterImageUrl(getActivity(), movie.posterPath, getString(R.string.image_size_detail)))
                 .into((ImageView)v.findViewById(R.id.movie_poster_image));
     }
 

@@ -40,7 +40,7 @@ public class MovieAdapter extends ArrayAdapter<Movie>
 
         final Movie selectedMovie = getItem(position);
         Picasso.with(getContext())
-                .load(getPosterImageUrl(getContext(), selectedMovie.posterPath, getContext().getString(R.string.image_size_med)))
+                .load(getPosterImageUrl(getContext(), selectedMovie.posterPath, getContext().getString(R.string.image_size_main)))
                 .into(holder.posterImage);
 
         holder.posterImage.setOnClickListener(new View.OnClickListener() {
