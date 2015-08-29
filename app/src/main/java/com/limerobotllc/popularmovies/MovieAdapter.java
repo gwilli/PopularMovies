@@ -1,6 +1,7 @@
 package com.limerobotllc.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import com.limerobotllc.popularmovies.model.Movie;
 import com.squareup.picasso.Picasso;
 
+import static com.limerobotllc.popularmovies.service.MovieServiceHelper.getPosterImageUrl;
+
 public class MovieAdapter extends ArrayAdapter<Movie>
 {
     public MovieAdapter(Context context, Movie[] movies)
@@ -18,7 +21,7 @@ public class MovieAdapter extends ArrayAdapter<Movie>
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         View view = convertView;
         ViewHolder holder;
@@ -35,21 +38,21 @@ public class MovieAdapter extends ArrayAdapter<Movie>
             holder = (ViewHolder) view.getTag();
         }
 
+        final Movie selectedMovie = getItem(position);
         Picasso.with(getContext())
-                .load(getPosterImageUrl(getItem(position).posterPath))
+                .load(getPosterImageUrl(getContext(), selectedMovie.posterPath, getContext().getString(R.string.image_size_med)))
                 .into(holder.posterImage);
 
+        holder.posterImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = MovieDetailFragmentActivity.getLaunchIntent(getContext(), selectedMovie);
+                getContext().startActivity(intent);
+            }
+        });
+
         return view;
-    }
-
-    private String getPosterImageUrl(String posterpath)
-    {
-        if (posterpath == null)
-            return null;
-
-        String urlBase = getContext().getString(R.string.image_base_url);
-        String size = getContext().getString(R.string.image_size);
-        return urlBase + size + posterpath;
     }
 
     static class ViewHolder

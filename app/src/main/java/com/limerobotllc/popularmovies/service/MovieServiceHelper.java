@@ -28,4 +28,14 @@ public class MovieServiceHelper
 
         service.discoverMovies(sort, context.getString(R.string.tmdb_api_key), callback);
     }
+
+    public static String getPosterImageUrl(Context context, String posterpath, String size)
+    {
+        if (posterpath == null)
+            return null;
+
+        String urlBase = context.getString(R.string.image_base_url);
+        return urlBase + size + posterpath;
+    }
+
 }
