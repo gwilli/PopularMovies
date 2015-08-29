@@ -20,7 +20,12 @@
         </activity>
         <activity
             android:name=".MovieDetailFragmentActivity"
+            android:parentActivityName=".MainDiscoveryActivity"
             android:label="@string/movie_detail_title" >
+            <!-- Parent activity meta-data to support api 15 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainDiscoveryActivity" />
         </activity>
     </application>
 
