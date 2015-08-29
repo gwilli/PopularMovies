@@ -48,14 +48,14 @@
                 android:id="@+id/movie_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/abc_text_size_subtitle_material_toolbar"
+                android:textSize="@dimen/abc_text_size_subhead_material"
                 tools:text="YEAR"/>
 
             <TextView
                 android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/abc_text_size_subtitle_material_toolbar"
+                android:textSize="@dimen/abc_text_size_subhead_material"
                 tools:text="8.1 / 10"/>
 
         </LinearLayout>

@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.limerobotllc.popularmovies.model.Movie;
 import com.squareup.picasso.Picasso;
 
 import static com.limerobotllc.popularmovies.MovieDetailFragmentActivity.PARAM_MOVIE;
 import static com.limerobotllc.popularmovies.service.MovieServiceHelper.getPosterImageUrl;
+import static com.limerobotllc.popularmovies.util.ViewHelper.setTextView;
 
 /**
  * Fragment to display the movie details.
@@ -40,10 +40,11 @@ public class MovieDetailFragment extends Fragment
 
     private void setMovieDetails(View v)
     {
-        ((TextView) v.findViewById(R.id.movie_title)).setText(movie.title);
-        ((TextView) v.findViewById(R.id.movie_rating)).setText(getString(R.string.movie_rating, movie.voteAverage));
-        ((TextView) v.findViewById(R.id.movie_year)).setText(getMovieYear(movie.releaseDateString));
-        ((TextView) v.findViewById(R.id.movie_synopsis)).setText(movie.overview);
+        setTextView(v, R.id.movie_title, movie.title);
+        setTextView(v, R.id.movie_rating, getString(R.string.movie_rating, movie.voteAverage));
+        setTextView(v, R.id.movie_year, getMovieYear(movie.releaseDateString));
+        setTextView(v, R.id.movie_synopsis, movie.overview);
+
         Picasso.with(getActivity())
                 .load(getPosterImageUrl(getActivity(), movie.posterPath, getString(R.string.image_size_detail)))
                 .into((ImageView)v.findViewById(R.id.movie_poster_image));
