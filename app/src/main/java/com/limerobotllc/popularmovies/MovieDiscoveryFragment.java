@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.limerobotllc.popularmovies.model.Movie;
 import com.limerobotllc.popularmovies.model.MovieResults;
 import com.limerobotllc.popularmovies.service.MovieServiceHelper;
+import com.limerobotllc.popularmovies.util.FavoriteHelper;
+
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -78,8 +81,18 @@ public class MovieDiscoveryFragment extends Fragment implements Callback<MovieRe
     {
         if (!sortCriteria.equals(this.sortCriteria))
         {
-            MovieServiceHelper.retrieveMovies(getActivity().getApplicationContext(), sortCriteria, this);
-            this.sortCriteria = sortCriteria;
+            if (sortCriteria.equals("favorites"))
+            {
+                List<Movie> movies = FavoriteHelper.getAllMovieFavorites(getActivity());
+                MovieResults results = new MovieResults(1, movies.toArray(new Movie[movies.size()]));
+                success(results, null);
+            }
+            else
+            {
+                MovieServiceHelper.retrieveMovies(getActivity().getApplicationContext(),
+                        sortCriteria, this);
+                this.sortCriteria = sortCriteria;
+            }
         }
     }
 }

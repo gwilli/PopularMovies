@@ -5,13 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.limerobotllc.popularmovies.model.Movie;
+import com.limerobotllc.popularmovies.util.FavoriteHelper;
 import com.squareup.picasso.Picasso;
 
 import static com.limerobotllc.popularmovies.MovieDetailFragmentActivity.PARAM_MOVIE;
 import static com.limerobotllc.popularmovies.service.MovieServiceHelper.getPosterImageUrl;
+import static com.limerobotllc.popularmovies.util.FavoriteHelper.isMovieAFavorite;
 import static com.limerobotllc.popularmovies.util.ViewHelper.setTextView;
 
 /**
@@ -47,7 +50,23 @@ public class MovieDetailFragment extends Fragment
 
         Picasso.with(getActivity())
                 .load(getPosterImageUrl(getActivity(), movie.posterPath, getString(R.string.image_size_detail)))
-                .into((ImageView)v.findViewById(R.id.movie_poster_image));
+                .into((ImageView) v.findViewById(R.id.movie_poster_image));
+
+        Button addToFavoritesButton = (Button) v.findViewById(R.id.favorite_button);
+        if (addToFavoritesButton != null)
+            addToFavoritesButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v)
+                {
+                    boolean isFavorite = isMovieAFavorite(getActivity(), movie);
+                    if (isFavorite)
+                        FavoriteHelper.removeFromFavorites(getActivity(), movie);
+                    else
+                        FavoriteHelper.addMovieToFavorites(getActivity(), movie);
+                    toggleFavoriteButton((Button)v, !isFavorite);
+                }
+            });
+        toggleFavoriteButton(addToFavoritesButton, isMovieAFavorite(getActivity(), movie));
     }
 
     private String getMovieYear(String date)
@@ -55,5 +74,10 @@ public class MovieDetailFragment extends Fragment
         if (date == null || date.isEmpty())
             return "";
         return date.split("-")[0];
+    }
+
+    private void toggleFavoriteButton(Button button, boolean isFavorite)
+    {
+        button.setText(isFavorite ? R.string.favorite_button_remove_favorite : R.string.favorite_button_set_favorite);
     }
 }
