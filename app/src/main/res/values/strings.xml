@@ -8,6 +8,9 @@
     <string name="tmdb_endpoint_url">http://api.themoviedb.org</string>
     <string name="tmdb_server_error_msg">Unable to contact movie server. Please check your network connection and try again.</string>
 
+    <string name="app_movie_detail_base_url">app://moviedetail/</string>
+    <string name="error_no_movie_found">Could not find movie.</string>
+
     <string name="movie_detail_title">Movie Details</string>
     <string name="movie_rating">%.1f / 10</string>
     <string name="action_settings">Settings</string>

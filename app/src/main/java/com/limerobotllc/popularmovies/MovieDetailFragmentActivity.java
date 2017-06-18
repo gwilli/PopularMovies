@@ -2,21 +2,23 @@ package com.limerobotllc.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.limerobotllc.popularmovies.model.Movie;
+import com.limerobotllc.popularmovies.util.UriHelper;
 
 public class MovieDetailFragmentActivity extends AppCompatActivity
 {
-    public static final String PARAM_MOVIE = "param_movie";
+    public static final String PARAM_MOVIE_ID = "movieId";
 
-    public static Intent getLaunchIntent(Context context, Movie movie)
+    public static Intent getLaunchIntent(Context context, long movieId)
     {
         Intent intent = new Intent(context, MovieDetailFragmentActivity.class);
-        intent.putExtra(PARAM_MOVIE, movie);
+        intent.setData(Uri.parse(context.getString(R.string.app_movie_detail_base_url) + movieId));
         return intent;
     }
 
@@ -28,10 +30,11 @@ public class MovieDetailFragmentActivity extends AppCompatActivity
 
         if (savedInstanceState == null)
         {
-            Movie movie = (Movie) getIntent().getSerializableExtra(PARAM_MOVIE);
+            Uri appLinkData = getIntent().getData();
+            long movieId = UriHelper.getIdFromLastSegment(appLinkData);
             MovieDetailFragment fragment = new MovieDetailFragment();
             Bundle args = new Bundle();
-            args.putSerializable(PARAM_MOVIE, movie);
+            args.putLong(PARAM_MOVIE_ID, movieId);
             fragment.setArguments(args);
             getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
         }

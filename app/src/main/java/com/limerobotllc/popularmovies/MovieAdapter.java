@@ -47,7 +47,7 @@ public class MovieAdapter extends ArrayAdapter<Movie>
             @Override
             public void onClick(View v)
             {
-                Intent intent = MovieDetailFragmentActivity.getLaunchIntent(getContext(), selectedMovie);
+                Intent intent = MovieDetailFragmentActivity.getLaunchIntent(getContext(), selectedMovie.id);
                 getContext().startActivity(intent);
             }
         });

@@ -32,7 +32,7 @@ public class MovieServiceTest extends AndroidTestCase
 
         MovieService service = restAdapter.create(MovieService.class);
 
-        MovieResults results = service.discoverMovies(MovieService.SORT_BY_POPULARITY, apiKey);
+        MovieResults results = service.discoverMovies("popularity.desc", apiKey);
 
         assertNotNull("results is null", results);
         assertEquals(1, results.page);
