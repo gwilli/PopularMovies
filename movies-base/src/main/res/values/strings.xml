@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">PopularMovies</string>
 
-    <string name="image_base_url">http://image.tmdb.org/t/p/</string>
+    <string name="image_base_url">https://image.tmdb.org/t/p/</string>
     <string name="image_size_main">w342</string>
     <string name="image_size_detail">w185</string>
 
-    <string name="tmdb_endpoint_url">http://api.themoviedb.org</string>
+    <string name="tmdb_endpoint_url">https://api.themoviedb.org</string>
     <string name="tmdb_server_error_msg">Unable to contact movie server. Please check your network connection and try again.</string>
 
     <string name="app_movie_detail_base_url">app://moviedetail/</string>

@@ -1,11 +1,12 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.feature'
 
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.0'
 
+    baseFeature true
+
     defaultConfig {
-        applicationId "com.limerobotllc.popularmovies"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -27,6 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+
+    application project(":movies-base")
 
     // unit tests
     testCompile 'junit:junit:4.12'
