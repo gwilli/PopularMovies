@@ -1,25 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.limerobotllc.popularmovies">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+    package="com.limerobotllc.popularmovies.details" >
+    <application>
         <activity
-            android:name="com.limerobotllc.popularmovies.MainDiscoveryActivity"
-            android:label="@string/app_name">
-            <tools:validation testUrl="https://www.limerobotsoftware.com/movies" />
+            android:name="com.limerobotllc.popularmovies.MovieDetailFragmentActivity"
+            android:parentActivityName="com.limerobotllc.popularmovies.MainDiscoveryActivity"
+            android:label="@string/movie_detail_title">
+            <tools:validation testUrl="https://www.limerobotsoftware.com/moviedetails/87101" />
+            <tools:validation testUrl="https://www.limerobotsoftware.com/moviedetails/221356" />
+            <tools:validation testUrl="https://www.limerobotsoftware.com/moviedetails/135416" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!-- Parent activity meta-data to support api 15 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.limerobotllc.popularmovies.MainDiscoveryActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -29,7 +24,7 @@
                 <data
                     android:scheme="http"
                     android:host="www.limerobotsoftware.com"
-                    android:path="/movies" />
+                    android:pathPrefix="/moviedetails" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -40,9 +35,8 @@
                 <data
                     android:scheme="https"
                     android:host="www.limerobotsoftware.com"
-                    android:path="/movies" />
+                    android:pathPrefix="/moviedetails" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

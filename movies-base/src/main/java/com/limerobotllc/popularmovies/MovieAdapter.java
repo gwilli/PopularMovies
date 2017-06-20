@@ -1,7 +1,9 @@
 package com.limerobotllc.popularmovies;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,14 @@ public class MovieAdapter extends ArrayAdapter<Movie>
             @Override
             public void onClick(View v)
             {
-                Intent intent = MovieDetailFragmentActivity.getLaunchIntent(getContext(), selectedMovie.id);
+                //Intent intent = MovieDetailFragmentActivity.getLaunchIntent(getContext(), selectedMovie.id);
+                //Intent intent = new Intent(Intent.ACTION_VIEW);
+                //intent.setData(Uri.parse("https://www.limerobotsoftware.com/moviedetail/" + selectedMovie.id));
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.limerobotllc.popularmovies",
+                        "com.limerobotllc.popularmovies.MovieDetailFragmentActivity"));
+                intent.setData(Uri.parse(getContext().getString(R.string.app_movie_detail_base_url)
+                        + selectedMovie.id));
                 getContext().startActivity(intent);
             }
         });
